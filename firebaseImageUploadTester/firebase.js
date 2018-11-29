@@ -1,5 +1,8 @@
+var theFile;
+var successfulUploadToBrowser;
 var database;
 var storageRef;
+var successfulUploadToFirebase;
 
 function setupFirebase()
 {
@@ -19,52 +22,53 @@ function setupFirebase()
 
 	// reference to storage
 	storageRef = firebase.storage();
+
+	successfulUploadToFirebase = false;  
+	successfulUploadToBrowser = false;
 }
 
 
-function submitImage2(theFile)
+// this function assist with sketch.js 
+function hasUploadToFirebase()
 {
-	// ---------------------------------------- Part I --------------------------------------------------
-	// target the root folder   root/
-	var rootUploadRef = storageRef.ref();
-
-	// target the subfolder within   root/images/
-	var imagesFolderUploadRef = storageRef.ref('images')
-
-	// define the file name to be uploaded; this takes the original file
-	imagesFolderUploadRef.child(theFile.name);
-
-	var metadata = {
-		'contentType': theFile.type
-	}
-
-	imagesFolderUploadRef.put(theFile, metadata).then(function(snapshot) {
-		console.log('Uploaded a blob or file!');
-		console.log('file name: ',theFile.name);
-	});
-
-	// ---------------------------------------- Part I --------------------------------------------------
+  if (successfulUploadToFirebase)
+  {
+    return true;
+  }
+  return false;
+}
 
 
-	// ---------------------------------------- Part II --------------------------------------------------
+// this function initiates file upload from computer to browser through the "choose file button"
+function previewFile() {
 
-	var data = {
-		name: "me",
-		date: Date()
-	}
+  var preview = document.querySelector('img');
 
-//	database.ref('scores').push(data);
+  // take the first file and upload it
+  var file    = document.querySelector('input[type=file]').files[0];
+  var reader  = new FileReader();
 
-	// File or Blob named mountains.jpg
-	var file = theFile;
-
-	// Create the file metadata
-	var metadata = {
-	  contentType: file.type
-	};
+  successfulUploadToBrowser = false;
 
 
-	// ---------------------------------------- Part II --------------------------------------------------
+
+  reader.addEventListener("load", function () {
+    preview.src = reader.result;
+
+    // save the image file onto firebase
+//    submitHighScore("Nov 26",3,"imagefile");
+    submitImage2(file);
+
+    successfulUploadToBrowser = true;
+
+    // load image data into a variable for p5js
+    theFile = loadImage(reader.result);
+  }, false);
+
+  if (file) {
+    reader.readAsDataURL(file);
+  }
+
 
 }
 
@@ -72,7 +76,7 @@ function submitHighScore(newName,newScore,theImage)
 {
 	
 	// access the sccores node
-	// a / will traverse the tree  e.g. scores/spaceinvaders
+	// a / will traverse the tree  e.g. scores/
 	var ref = database.ref('scores');
 
 	var data = {
@@ -86,3 +90,40 @@ function submitHighScore(newName,newScore,theImage)
 	
 
 }
+
+function submitImage2(theFile)
+{
+	successfulUploadToFirebase = false;
+	// ---------------------------------------- Part I --------------------------------------------------
+	// target the root folder   root/
+	var rootUploadRef = storageRef.ref();
+
+	// target the subfolder within and what the file is called
+	// root/images/picture
+	var imagesFolderUploadRef = storageRef.ref('images/'+theFile.name);
+
+	// add metadata like extensions .jpg
+	var metadata = {
+		'contentType': theFile.type
+	}
+	
+	imagesFolderUploadRef.put(theFile, metadata).then(function(snapshot) {
+		console.log('Uploaded a blob or file!');
+		console.log('file name: ',theFile.name);
+    	successfulUploadToFirebase = true;
+	});
+
+	// ---------------------------------------- Part I --------------------------------------------------
+
+}
+
+
+function hasUploadToBrowser()
+{
+  if (successfulUploadToBrowser)
+  {
+    return true;
+  }
+  return false;
+}
+

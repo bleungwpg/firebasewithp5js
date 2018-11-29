@@ -1,69 +1,83 @@
-var canvasID;
 var p5ImageFile;
 
 function preload()
 {
-//	preloadPlatforms();
 }
 
 function setup()
 {
-	createCanvas(600,400);
+	createCanvas(500,200);
 	setupFirebase();
-//	setupHighScore();
-
-	canvasID = 1;
 
 }
 
 function draw()
 {
-	if (canvasID == 1)
+
+	background(0,0,0);
+
+	fill(255);
+
+	// check if the image has been successfully updated to browser
+	if (hasUploadToBrowser())
 	{
-		background(0,0,0);
-		fill(125);
-		rect(10,10,100,40);
-		fill(255);
-		text("Show Image",20,30);
-
-		if (mouseX > 10 && mouseX < 10+100 && mouseY > 10 && mouseY < 10 + 40 && mouseIsPressed)
+		fill(0,255,0);
+		text("Successful upload to browser",60,50);
+		if (theFile.width > 100 || theFile.height > 100)
 		{
-
-			/*
-		    var x = document.getElementById("myFile");
-
-			var reader = new FileReader();
-
-			// Closure to capture the file information.
-			reader.onload = (function(theFile) {
-				return function(e) {
-					// Render thumbnail.
-					var span = document.createElement('span');
-					span.innerHTML = ['<img class="thumb" src="', e.target.result,
-					                '" title="', escape(x.files.name), '"/>'].join('');
-
-//					p5ImageFile = loadImage(span);
-					document.getElementById('list').insertBefore(span, null);
-				};
-			})(x.files[0]);
-
-			// Read in the image file as a data URL.
-			reader.readAsDataURL(x.files[0]);
-*/
-			
-//		    console.log(x.files.length);
-		    image(theFile,200,50);
+			sizeDownImage(theFile,250,25);
 		}
-/*
-		if (showHighScoreButton(400,10,100,50) == -2)
+		else
 		{
-			canvasID = -2;
+		    image(theFile,250,25);
 		}
-		*/
 	}
-	else if (canvasID == -2)
+	else
 	{
-//		viewHighScore();
+		text("Waiting to upload to browser",60,50);
 	}
+
+
+	if (hasUploadToFirebase())
+	{
+		fill(0,255,0);
+		text("Successful upload to firebase",60,150);
+		if (theFile.width > 100 || theFile.height > 100)
+		{
+			sizeDownImage(theFile,250,125);
+		}
+		else
+		{
+		    image(theFile,250,125);
+		}
+	}
+	else
+	{
+		text("Waiting to upload to firebase",60,150);		
+	}
+
 }
 
+function sizeDownImage(imageFile,x,y)
+{
+	var finished = false;
+	var newWidth = imageFile.width;
+	var newHeight = imageFile.height;
+	var count = 0;
+
+	while (!finished)
+	{
+		if (newWidth > 100 || newHeight > 100)
+		{
+			newWidth /= 2;
+			newHeight /= 2;
+		}
+		else
+		{
+			finished = true;
+		}
+		count++;
+		console.log(count);
+	}
+	image(imageFile,x,y,newWidth,newHeight);
+}
