@@ -56,7 +56,7 @@ function previewFile() {
     preview.src = reader.result;
 
     // save the image file onto firebase
-//    submitHighScore("Nov 26",3,"imagefile");
+	submitImageList(file.name);
     submitImage2(file);
 
     successfulUploadToBrowser = true;
@@ -72,29 +72,23 @@ function previewFile() {
 
 }
 
-function submitHighScore(newName,newScore,theImage)
+function submitImageList(imageFileName)
 {
 	
-	// access the sccores node
-	// a / will traverse the tree  e.g. scores/
-	var ref = database.ref('scores');
+	var ref = database.ref('imagelist');
 
 	var data = {
-		name: newName,
-		score: newScore,
-		imageFile: theImage
+		name: imageFileName
 	}
-
 
 	ref.push(data);
 	
-
 }
 
 function submitImage2(theFile)
 {
 	successfulUploadToFirebase = false;
-	// ---------------------------------------- Part I --------------------------------------------------
+
 	// target the root folder   root/
 	var rootUploadRef = storageRef.ref();
 
@@ -112,8 +106,6 @@ function submitImage2(theFile)
 		console.log('file name: ',theFile.name);
     	successfulUploadToFirebase = true;
 	});
-
-	// ---------------------------------------- Part I --------------------------------------------------
 
 }
 
