@@ -1,4 +1,4 @@
-var firebaseApp;
+var firebaseApp = {};
 
 
 (function(){
