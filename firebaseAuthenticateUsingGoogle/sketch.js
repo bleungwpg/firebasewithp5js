@@ -38,7 +38,7 @@ function draw()
 	fill(125);
 	rect(10,200,100,40);
 	fill(255);
-	text("Sign in",30,230);
+	text("Sign in Redirect",30,230);
 
 
 
