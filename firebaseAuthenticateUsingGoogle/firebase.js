@@ -55,6 +55,7 @@ function googleSignin()
 	  if (result.credential) {
 	    // This gives you a Google Access Token. You can use it to access the Google API.
 	    var token = result.credential.accessToken;
+			console.log('accessing google API');
 	    // ...
 	  }
 	  // The signed-in user info.
@@ -68,6 +69,9 @@ function googleSignin()
 	  // The firebase.auth.AuthCredential type that was used.
 	  var credential = error.credential;
 	  // ...
+		console.log(errorCode);
+		console.log(errorMessage);
+
 	});
 
 	/*
