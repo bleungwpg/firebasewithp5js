@@ -30,9 +30,9 @@
 	    firebase.auth.PhoneAuthProvider.PROVIDER_ID
 	  ],
 	  // Terms of service url.
-	  tosUrl: '<your-tos-url>',
+	  tosUrl: 'main.html',
 	  // Privacy policy url.
-	  privacyPolicyUrl: '<your-privacy-policy-url>'
+	  privacyPolicyUrl: 'main.html'
 	};
 
 	// The start method will wait until the DOM is loaded.

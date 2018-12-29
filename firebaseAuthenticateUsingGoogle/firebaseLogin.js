@@ -11,6 +11,8 @@ var firebaseApp;
 		storageBucket: "p5jstester.appspot.com",
 		messagingSenderId: "294054023101"
 	};
-	firebaseApp = firebase.initializeApp(config);
+	firebase.initializeApp(config);
+
+	firebaseApp = firebase;
 
 })
