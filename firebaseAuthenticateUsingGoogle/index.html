@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="p5.min.js"></script>
-    <script src="p5.dom.js"></script>
-    <script src="p5.sound.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
-    <script src="firebase.js"></script>
-    <script src="sketch.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
   </head>
 
       <body>
-      <h1>Image Download Test</h1>
+      <h1>Welcome to the Login Screen</h1>
+      <!-- The surrounding HTML is left untouched by FirebaseUI.
+           Your app may use that space for branding, controls and other customizations.-->>
+      <div id="firebaseui-auth-container"></div>
+      <div id="loader">Loading...</div>
+      <script src="firebaseLogin.js"></script>
+      <script src="login.js"></script>
+
   </body>
 </html>
