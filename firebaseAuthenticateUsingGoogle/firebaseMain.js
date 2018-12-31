@@ -9,23 +9,6 @@ var provider;
 
 function setupFirebase()
 {
-
-	var user = firebase.auth().currentUser;
-	var name, email, photoUrl, uid, emailVerified;
-
-	if (user != null) {
-	  name = user.displayName;
-	  email = user.email;
-	  photoUrl = user.photoURL;
-	  emailVerified = user.emailVerified;
-	  uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-	                   // this value to authenticate with your backend server, if
-	                   // you have one. Use User.getToken() instead.
-		console.log('user: '+name);
-		console.log('email: '+email);
-	}
-
-
 	var config = {
 		apiKey: "AIzaSyBh258HDhov9mIVUjJRiCxNzf4-hmllZWU",
 		authDomain: "p5jstester.firebaseapp.com",
@@ -41,6 +24,24 @@ function setupFirebase()
 
 	// reference to storage
 	storageRef = firebase.storage();
+
+/*
+	var user = firebase.auth().currentUser;
+	var name, email, photoUrl, uid, emailVerified;
+
+	if (user != null) {
+	  name = user.displayName;
+	  email = user.email;
+	  photoUrl = user.photoURL;
+	  emailVerified = user.emailVerified;
+	  uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
+	                   // this value to authenticate with your backend server, if
+	                   // you have one. Use User.getToken() instead.
+		console.log('user: '+name);
+		console.log('email: '+email);
+	}
+	*/
+
 
 }
 
