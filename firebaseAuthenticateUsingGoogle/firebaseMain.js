@@ -25,7 +25,7 @@ function setupFirebase()
 	// reference to storage
 	storageRef = firebaseApp.storage();
 
-/*
+
 	var user = firebase.auth().currentUser;
 	var name, email, photoUrl, uid, emailVerified;
 
@@ -40,7 +40,10 @@ function setupFirebase()
 		console.log('user: '+name);
 		console.log('email: '+email);
 	}
-	*/
+	else {
+		console.log('null user');
+	}
+
 
 
 }
