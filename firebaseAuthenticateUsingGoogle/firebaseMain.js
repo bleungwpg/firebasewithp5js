@@ -6,6 +6,8 @@ var theImage;
 var imageReady;
 var provider;
 
+var myUserName;
+
 
 function setupFirebase()
 {
@@ -38,6 +40,7 @@ function setupFirebase()
 	                   // this value to authenticate with your backend server, if
 	                   // you have one. Use User.getToken() instead.
 		console.log('user: '+name);
+		myUserName = name;
 		console.log('email: '+email);
 	}
 	else {
@@ -48,6 +51,10 @@ function setupFirebase()
 
 }
 
+function getUserName()
+{
+	return myUserName;
+}
 
 function downloadImage()
 {

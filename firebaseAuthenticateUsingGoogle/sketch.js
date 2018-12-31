@@ -1,5 +1,4 @@
 var p5ImageFile;
-var btnSignIn;
 
 function preload()
 {
@@ -12,8 +11,6 @@ function setup()
 
 	var x = downloadImage();
 	console.log(x);
-
-	btnSignIn = 0;
 
 }
 
@@ -31,7 +28,10 @@ function draw()
 		if (getImageURL() != "-1")
 		{
 			p5ImageFile = getImageURL();
-		    image(p5ImageFile,200,50);
+			image(p5ImageFile,200,50);
+			var myname = getUserName();
+			fill(200,200,200);
+			text(myname,200,100);
 		}
 	}
 
