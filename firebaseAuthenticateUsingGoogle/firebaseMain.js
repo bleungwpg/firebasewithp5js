@@ -20,10 +20,10 @@ function setupFirebase()
 	firebaseApp = firebase.initializeApp(config);
 
 	// reference to Real-Time database
-	database = firebase.database();
+	database = firebaseApp.database();
 
 	// reference to storage
-	storageRef = firebase.storage();
+	storageRef = firebaseApp.storage();
 
 /*
 	var user = firebase.auth().currentUser;
