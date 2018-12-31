@@ -7,8 +7,12 @@ var imageReady;
 var provider;
 
 
-(function(){
-	// Initialize Firebase
+function setupFirebase()
+{
+
+
+
+
 	var config = {
 		apiKey: "AIzaSyBh258HDhov9mIVUjJRiCxNzf4-hmllZWU",
 		authDomain: "p5jstester.firebaseapp.com",
@@ -19,32 +23,12 @@ var provider;
 	};
 	firebaseApp = firebase.initializeApp(config);
 
-})
-
-function setupFirebase()
-{
-
 	// reference to Real-Time database
 	database = firebase.database();
 
 	// reference to storage
 	storageRef = firebase.storage();
 
-
-	// setup sign in authentication
-	provider = new firebase.auth.GoogleAuthProvider();
-
-	/* optional sign in authentication parameters
-	provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-
-	firebase.auth().languageCode = 'pt';
-	// To apply the default browser preference instead of explicitly setting it.
-	// firebase.auth().useDeviceLanguage();
-
-	provider.setCustomParameters({
-  		'login_hint': 'user@example.com'
-	});
-	*/
 
 	console.log('sign in using google');
 
@@ -53,57 +37,6 @@ function setupFirebase()
 
 }
 
-function googleSignin()
-{
-	firebase.auth().signInWithRedirect(provider);
-
-	firebase.auth().getRedirectResult().then(function(result) {
-		console.log('accessing google API');
-	  if (result.credential) {
-	    // This gives you a Google Access Token. You can use it to access the Google API.
-	    var token = result.credential.accessToken;
-
-	    // ...
-	  }
-	  // The signed-in user info.
-	  var user = result.user;
-	}).catch(function(error) {
-	  // Handle Errors here.
-	  var errorCode = error.code;
-	  var errorMessage = error.message;
-	  // The email of the user's account used.
-	  var email = error.email;
-	  // The firebase.auth.AuthCredential type that was used.
-	  var credential = error.credential;
-	  // ...
-		console.log(errorCode);
-		console.log(errorMessage);
-
-	});
-
-	/*
-	firebase.auth().signInWithPopup(provider).then(function(result) {
-	  // This gives you a Google Access Token. You can use it to access the Google API.
-	  var token = result.credential.accessToken;
-	  // The signed-in user info.
-	  var user = result.user;
-	  console.log(result);
-	  console.log('successful signin with google');
-	  // ...
-	}).catch(function(error) {
-	  // Handle Errors here.
-	  var errorCode = error.code;
-	  var errorMessage = error.message;
-	  // The email of the user's account used.
-	  var email = error.email;
-	  // The firebase.auth.AuthCredential type that was used.
-	  var credential = error.credential;
-	  console.log(errorCode);
-	  console.log('error sign in with google');
-	  // ...
-	});
-	*/
-}
 
 function downloadImage()
 {
