@@ -26,7 +26,7 @@ function setupFirebase()
 	storageRef = firebaseApp.storage();
 
 
-	var user = firebase.auth().currentUser;
+	var user = firebaseApp.auth().currentUser;
 	var name, email, photoUrl, uid, emailVerified;
 
 	if (user != null) {
